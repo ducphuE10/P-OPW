@@ -2,11 +2,30 @@ import numpy as np
 import ot
 import cv2
 
+
+def POT_feature(M,m,nb_dummies=1):
+    a = np.ones(M.shape[0])
+    b = np.ones(M.shape[1])
+
+    if m < 0:
+        raise ValueError("Problem infeasible. Parameter m should be greater"
+                         " than 0.")
+    elif m > np.min((np.sum(a), np.sum(b))):
+        raise ValueError("Problem infeasible. Parameter m should lower or"
+                         " equal than min(|a|_1, |b|_1).")
+
+    b_extended = np.append(b, [(np.sum(a) - m) / nb_dummies] * nb_dummies)
+    a_extended = np.append(a, [(np.sum(b) - m) / nb_dummies] * nb_dummies)
+    M_extended = np.zeros((len(a_extended), len(b_extended)))
+    M_extended[-nb_dummies:, -nb_dummies:] = np.max(M) * 2
+    M_extended[:len(a), :len(b)] = M
+
+
 def opw(X, Y, lambda1=1, lambda2=0.1, delta=1, metric='euclidean'):
     """preserved OT
     Args:
-        X (ndarray): view1
-        Y (ndarray): view2
+        X (ndarray): view1 (len_seq, feature)
+        Y (ndarray): view2 (len_seq, feature)
         lambda1 (int, optional): weight of first term. Defaults to 50.
         lambda2 (float, optional): weight of second term. Defaults to 0.1.
         delta (int, optional): _description_. Defaults to 1.
@@ -75,54 +94,8 @@ def opw(X, Y, lambda1=1, lambda2=0.1, delta=1, metric='euclidean'):
     dis = np.sum(u * (U @ v))
     T = np.diag(u[:, 0]) @ K @ np.diag(v[:, 0])
 
+    # return dis,T
     return dis
 
 
-# import os
-# import seaborn as sns
-# import matplotlib.pyplot as plt
-# from os import listdir
-# from os.path import isfile, join
-#
-# os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-# N = 10
-# d = 3
 
-# data1 = np.arange(N*d).reshape(N, d)
-# # perm = np.array([1, 2, 0, 5, 4, 3, 8, 9, 6, 7])
-# perm = np.array([9, 8, 7, 6, 5, 4, 3, 2, 1, 0])
-# data2 = data1.copy()[perm]
-
-# data1 = []
-# path_data1 = ['img/img1/'+f for f in listdir('img/img1')]
-# for p1 in path_data1:
-#     img = cv2.imread(p1)
-#     # img = resize(p1,1)
-#     flat_img = img.reshape((-1,))
-#     data1.append(flat_img)
-
-
-# data1 = np.array(data1)
-# print(data1.shape)
-#
-# # perm = np.array([11,10,9,8,7, 6, 5, 4, 3, 2, 1, 0])
-# # data2 = data1.copy()[perm]
-# #
-# data2 = []
-# path_data2 = ['img/img2/'+f for f in listdir('img/img2')]
-# for p2 in path_data2:
-#     img = cv2.imread(p2)
-#     # img = resize(p2, 10)
-#     flat_img = img.reshape((-1,))
-#     data2.append(flat_img)
-#
-# data2 = np.array(data2)
-# print(data2.shape)
-#
-#
-#
-#
-# dis, T = opw(data1, data2, lambda1=0.01, lambda2=0.001, delta=30,metric='euclidean')
-# # print(perm)
-# sns.heatmap(T)
-# plt.show()
