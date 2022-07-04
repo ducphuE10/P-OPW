@@ -4,12 +4,12 @@ from sklearn.metrics import accuracy_score
 from OPW import opw
 import numpy as np
 from DTW import dtw_distance
-import argparse
-
-parser = argparse.ArgumentParser(description='use KNN to classification time series data')
-parser.add_argument('distance', type=str, help='L2 or DTW or OPW')
-parser.add_argument('K', type=int, help='number of neighbors')
-args = parser.parse_args()
+# import argparse
+#
+# parser = argparse.ArgumentParser(description='use KNN to classification time series data')
+# parser.add_argument('distance', type=str, help='L2 or DTW or OPW')
+# parser.add_argument('K', type=int, help='number of neighbors')
+# args = parser.parse_args()
 
 
 def opw_(X, Y):
@@ -37,7 +37,9 @@ if __name__ == '__main__':
     X_train = np.array(X_train)
     X_test = np.array(X_test)
 
-    neigh = KNeighborsClassifier(n_neighbors=1, metric=dtw_)
+    # neigh = KNeighborsClassifier(n_neighbors=2, metric=dtw_)
+    # neigh = KNeighborsClassifier(n_neighbors=1, metric='euclidean')
+    neigh = KNeighborsClassifier(n_neighbors=2, metric=opw_)
     neigh.fit(X_train, y_train)
 
     y_pred = neigh.predict(X_test)
