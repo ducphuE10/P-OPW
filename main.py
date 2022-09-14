@@ -4,6 +4,7 @@ from sklearn.metrics import accuracy_score
 from OPW import opw
 import numpy as np
 from DTW import dtw_distance
+from algo.l1_ot_dis import TrendOTDis
 # import argparse
 #
 # parser = argparse.ArgumentParser(description='use KNN to classification time series data')
@@ -11,11 +12,15 @@ from DTW import dtw_distance
 # parser.add_argument('K', type=int, help='number of neighbors')
 # args = parser.parse_args()
 
+trend_ot_dis = TrendOTDis(50, 0.1, 1, 'opw')
 
 def opw_(X, Y):
     X = X.reshape(-1, 1)
     Y = Y.reshape(-1, 1)
     return opw(X, Y)
+
+def robustOPW_(X, Y):
+    return trend_ot_dis.dist(X, Y)
 
 
 def dtw_(X, Y):
@@ -39,7 +44,8 @@ if __name__ == '__main__':
 
     # neigh = KNeighborsClassifier(n_neighbors=2, metric=dtw_)
     # neigh = KNeighborsClassifier(n_neighbors=1, metric='euclidean')
-    neigh = KNeighborsClassifier(n_neighbors=2, metric=opw_)
+    # neigh = KNeighborsClassifier(n_neighbors=2, metric=opw_)
+    neigh = KNeighborsClassifier(n_neighbors=2, metric=robustOPW_)
     neigh.fit(X_train, y_train)
 
     y_pred = neigh.predict(X_test)
