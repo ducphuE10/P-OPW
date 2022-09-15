@@ -22,7 +22,7 @@ class BaseOrderPreserve:
     def get_d_matrix(self, x1, x2):
         pass
 
-    def fit(self, x1, x2, a, b, metric='euclidean', **kwargs):
+    def fit(self, x1, x2, a, b, metric='euclidean'):
         """
         Parameters
         ---------
@@ -46,14 +46,6 @@ class BaseOrderPreserve:
         tolerance = .5e-2
         maxIter = 20
 
-        if x1.ndim == 1:
-            x1 = x1.reshape(-1, 1)
-            x2 = x2.reshape(-1, 1)
-
-        d_matrix = self.get_d_matrix(x1, x2)
-        P = np.exp(-d_matrix ** 2 / (2 * self.delta ** 2)) / (self.delta * np.sqrt(2 * np.pi))
-        P = a@b.T * P
-
 
         N = x1.shape[0]
         M = x2.shape[0]
@@ -64,6 +56,14 @@ class BaseOrderPreserve:
         if b is None:
             b = np.ones((M, 1)) / M
 
+        if x1.ndim == 1:
+            x1 = x1.reshape(-1, 1)
+            x2 = x2.reshape(-1, 1)
+
+        d_matrix = self.get_d_matrix(x1, x2)
+        P = np.exp(-d_matrix ** 2 / (2 * self.delta ** 2)) / (self.delta * np.sqrt(2 * np.pi))
+        P = a@b.T * P
+
 
 
         row_col_matrix = np.mgrid[1:N + 1, 1:M + 1]
@@ -71,7 +71,7 @@ class BaseOrderPreserve:
         col = row_col_matrix[1] / M  # col = (j+1)/M
         S = self.lambda1 / ((row - col) ** 2 + 1)
 
-        D = ot.dist(x1, x2, metric=metric, **kwargs)
+        D = ot.dist(x1, x2, metric=metric)
 
         # max_distance = 200 * self.lambda2
         # D = np.clip(D, 0, max_distance)
@@ -96,11 +96,14 @@ class BaseOrderPreserve:
                 if criterion < tolerance:
                     break
 
+
         U = K * D
         self.dis = np.sum(u * (U @ v))
         self.T = np.diag(u[:, 0]) @ K @ np.diag(v[:, 0])
 
         # return self.dis, self.T
+
+
 
     def get_distance(self):
         return self.dis

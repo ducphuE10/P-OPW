@@ -1,15 +1,11 @@
-import numpy as np 
+import numpy as np
 from trend_decompose import l1filter
 import ot
 
 
 def res2prob(residual):
-    # residual = (residual - np.mean(residual))/np.std(residual)
-    # residual = (residual - np.min(residual))/(np.max(residual) - np.min(residual))
     residual = np.abs(residual)
-    # residual = (residual - np.mean(residual))/np.std(residual)
-    # residual = residual/np.median(residual)
-    residual = np.exp(-residual/2)
+    residual = np.exp(-residual/3)
     probs = residual/np.sum(residual)
     return probs
 
@@ -21,9 +17,6 @@ def get_prob(y1, y2, lam1=0.5, lam2=0.5):
 
     y1_prob = res2prob(y1_res).reshape(-1,1)
     y2_prob = res2prob(y2_res).reshape(-1,1)
-
-    join_prob = y1_prob.dot(y2_prob.T)
-
     return y1_prob, y2_prob
 
 
@@ -35,12 +28,12 @@ def robustOPW(D_hat ,a,b, lambda1=50, lambda2=0.1, delta=1, metric='euclidean'):
     b: probabilities (normalization)
     Return
     distance: distance between two sequences
-    T: 
+    T:
     '''
 
 
 
-    
+
 
     T = ot.sinkhorn(a, b, D_hat)
 
