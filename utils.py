@@ -30,7 +30,7 @@ def visualize(data,trend,threshold = None, fig_size = (30,16)):
     plt.show()
 
 
-def get_data(path):
+def get_data(path, dataset_size=-1):
     with open(path, 'r') as f:
         data = []
         labels = []
@@ -39,7 +39,9 @@ def get_data(path):
             record = [float(j) for j in  line.split()[1:]]
             data.append(record)
             labels.append(label)
-
+    if dataset_size > 0:
+        data = data[:dataset_size]
+        labels = labels[:dataset_size]
     return data, labels
 
 train_data, train_labels = get_data('FacesUCR/FacesUCR_TRAIN.txt')

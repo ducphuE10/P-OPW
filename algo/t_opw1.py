@@ -27,7 +27,7 @@ def t_opw1(X, Y, a=None,b=None, lambda1=50, lambda2=0.1, delta=1, metric='euclid
         distance, ot_plan: distance is the distance between views, ot_plan is the transport plan
     """
     tolerance = .5e-2
-    maxIter = 20
+    maxIter = 200
 
     N = X.shape[0]
     M = Y.shape[0]
@@ -53,8 +53,11 @@ def t_opw1(X, Y, a=None,b=None, lambda1=50, lambda2=0.1, delta=1, metric='euclid
     m,n = np.meshgrid(fy, fx)
     d_matrix = np.maximum(m,n) / np.minimum(m,n)
 
+
+
     P = np.exp(-d_matrix ** 2 / (2 * delta ** 2)) / (delta * np.sqrt(2 * np.pi))
     P = a@b.T * P
+    # import pdb; pdb.set_trace()
 
     S = lambda1 / ((row - col) ** 2 + 1)  # S = lamda1 * E in paper
 
@@ -62,7 +65,7 @@ def t_opw1(X, Y, a=None,b=None, lambda1=50, lambda2=0.1, delta=1, metric='euclid
 
     # Clip the distance matrix to prevent numerical errors
     # max_distance = 200 * lambda2
-    # D = np.clip(D, 0, max_distance)
+    # D = np.clip(D, 2e-5, max_distance)
     K = np.exp((S - D) / lambda2) * P
 
 
@@ -72,10 +75,11 @@ def t_opw1(X, Y, a=None,b=None, lambda1=50, lambda2=0.1, delta=1, metric='euclid
 
     compt = 0
     u = np.ones((N, 1)) / N
-
     while compt < maxIter:
         u = a / (K @ (b / (K.T @ u)))
-        assert not np.isnan(u).any(), "nan in u"
+        # assert not np.isnan(u).any(), "nan in u"
+        if np.isnan(u).any():
+            return np.inf, None
         compt += 1
 
         if compt % 20 == 0 or compt == maxIter:
@@ -85,6 +89,7 @@ def t_opw1(X, Y, a=None,b=None, lambda1=50, lambda2=0.1, delta=1, metric='euclid
             criterion = np.linalg.norm(
                 np.sum(np.abs(v * (K.T @ u) - b), axis=0), ord=np.inf)
             if criterion < tolerance:
+                # print("converged in {} iterations".format(compt))
                 break
 
     U = K * D

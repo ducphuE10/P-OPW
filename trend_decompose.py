@@ -138,5 +138,46 @@ def df_l1tf(df, delta=3, remove_outliers=False, mad_factor=3):
 #--------------------------------------------------------------------------------------------------------------------
 
 
-def robustTrend(y):
-    pass
+
+
+
+def soft_thresholding(x, threshold):
+    return np.sign(x) * np.maximum(np.abs(x) - threshold, 0)
+
+
+def huber_loss(x, threshold):
+    return np.where(np.abs(x) < threshold, 0.5 * x ** 2, threshold * (np.abs(x) - 0.5 * threshold))
+
+
+def huber_loss_derivative(x, threshold):
+    return np.where(np.abs(x) < threshold, x, threshold * np.sign(x))
+
+def diagonal_huber(x, threshold):
+    # return np.diag(np.divide(huber_loss_derivative(x, threshold),huber_loss(x, threshold)))
+    return np.diag(np.divide(huber_loss_derivative(x, threshold),x))
+
+def update_trend(D, y, trend, u, z, threshold):
+    A = diagonal_huber(y - trend, threshold)
+    trend = y - threshold * np.linalg.inv(( A + threshold * D.T @ D)) @ D.T @ (u - z + D @ y)
+    return trend
+
+def robustTrend(y, lambda1=0.4, lambda2=0.4, penalty_parameter=0.9, max_iter=200):
+    n = len(y)
+    t = np.zeros((n,))
+    z = np.zeros((2 * n,))
+    u = np.zeros((2 * n,))
+
+    #first order matrix
+    D1 = np.diag(np.ones(n-1),1) - np.diag(np.ones(n-1),-1)
+    #second order matrix
+    D2 = np.diag(np.ones(n-2),2) - 2*np.diag(np.ones(n-1),1) + np.diag(np.ones(n-2),-2)
+
+    D = np.concatenate((lambda1*D1, lambda2*D2), axis=0)
+
+    for iteration in range(max_iter):
+        x = y - t
+        A = diagonal_huber(x, penalty_parameter)
+        t = update_trend(D, y, t, u, z, penalty_parameter)
+        z = soft_thresholding(D @ t + u, penalty_parameter)
+        u = u + D @ t - z
+    return t

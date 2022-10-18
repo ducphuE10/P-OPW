@@ -4,3 +4,7 @@ configs
 **/*.pyc
 **/*.nbc
 **/*.nbi
+**/*.ipynb
+
+UCR_data/
+experiments_results.csv

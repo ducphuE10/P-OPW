@@ -22,7 +22,7 @@ class BaseOrderPreserve:
     def get_d_matrix(self, x1, x2):
         pass
 
-    def fit(self, x1, x2, a, b, metric='euclidean'):
+    def fit(self, x1, x2, x1_trend=None, x2_trend=None, a=None, b=None, metric='euclidean'):
         """
         Parameters
         ---------
@@ -44,7 +44,7 @@ class BaseOrderPreserve:
             transportation matrix between samples in :math:`\mathbf{x_1}` and :math:`\mathbf{x_2}`
         """
         tolerance = .5e-2
-        maxIter = 20
+        maxIter = 200
 
 
         N = x1.shape[0]
@@ -56,11 +56,18 @@ class BaseOrderPreserve:
         if b is None:
             b = np.ones((M, 1)) / M
 
+
         if x1.ndim == 1:
             x1 = x1.reshape(-1, 1)
             x2 = x2.reshape(-1, 1)
 
+        if x1_trend is None:
+            x1_trend = x1
+        if x2_trend is None:
+            x2_trend = x2
+
         d_matrix = self.get_d_matrix(x1, x2)
+        # d_matrix = self.get_d_matrix(x1_trend, x2_trend)
         P = np.exp(-d_matrix ** 2 / (2 * self.delta ** 2)) / (self.delta * np.sqrt(2 * np.pi))
         P = a@b.T * P
 
@@ -72,6 +79,7 @@ class BaseOrderPreserve:
         S = self.lambda1 / ((row - col) ** 2 + 1)
 
         D = ot.dist(x1, x2, metric=metric)
+        # D = D_goc
 
         # max_distance = 200 * self.lambda2
         # D = np.clip(D, 0, max_distance)
@@ -84,7 +92,10 @@ class BaseOrderPreserve:
         while compt < maxIter:
 
             u = a / (K @ (b / (K.T @ u)))
-            assert not np.isnan(u).any(), "nan in u"
+            # assert not np.isnan(u).any(), "nan in u"
+            if np.isnan(u).any():
+                self.dis = np.inf
+                return
             compt += 1
 
             if compt % 20 == 0 or compt == maxIter:

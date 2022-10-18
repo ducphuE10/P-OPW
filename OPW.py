@@ -1,6 +1,5 @@
 import numpy as np
 import ot
-import cv2
 
 
 def POT_feature(M,m,nb_dummies=1):
@@ -54,6 +53,9 @@ def opw(X, Y, lambda1=1, lambda2=0.1, delta=1, metric='euclidean'):
     col = row_col_matrix[1] / M   # col = (j+1)/M
 
     d_matrix = np.abs(row - col) / mid_para
+
+    # import ipdb; ipdb.set_trace()
+
     P = np.exp(-d_matrix**2/(2*delta**2)) / (delta*np.sqrt(2*np.pi))
 
     # S = np.zeros((N, M))
@@ -69,6 +71,7 @@ def opw(X, Y, lambda1=1, lambda2=0.1, delta=1, metric='euclidean'):
     D = np.clip(D, 0, max_distance)
 
     K = np.exp((S - D) / lambda2) * P
+
 
     a = np.ones((N, 1)) / N
     b = np.ones((M, 1)) / M
