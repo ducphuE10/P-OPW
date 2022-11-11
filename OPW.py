@@ -1,6 +1,5 @@
 import numpy as np
 import ot
-import cv2
 
 
 def POT_feature(M,m,nb_dummies=1):

@@ -5,7 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 from OPW import opw
 import numpy as np
-from DTW import dtw_distance
+# from DTW import dtw_distance
 from algo.l1_ot_dis import TrendOTDis
 import ray
 import argparse
@@ -40,11 +40,12 @@ if __name__ == '__main__':
     parser.add_argument('-l2', '--lambda2', type=float, default=0.1)
     parser.add_argument('-k','--n_neighbors', type=int, default=1, help='number of neighbors')
     parser.add_argument('-t','--test_size', type=int, default=-1, help='test size')
+    parser.add_argument('-m', '--method', type = str, default='opw',help = 'opw or topw1 or topw2')
     args = parser.parse_args()
 
     delta, lambda1, lambda2 = args.delta, args.lambda1, args.lambda2
     k = args.n_neighbors
-    method = 'opw'
+    method = args.method
 
     trend_ot_dis = TrendOTDis(lambda1, lambda2, delta, method)
 
@@ -52,7 +53,7 @@ if __name__ == '__main__':
     X_test, y_test = get_data('FacesUCR/FacesUCR_TEST.txt')
 
 
-
+    
 
     X_train = np.array(X_train)
     X_test = np.array(X_test)
@@ -86,7 +87,7 @@ if __name__ == '__main__':
     result = np.array(results_values).reshape(train_size, test_size)
     y_pred = y_train[np.argmin(result, axis=0)]
 
-    print("Accuracy: ",accuracy_score(y_test, y_pred))
+    print("Accuracy: ",accuracy_score(y_test, y_pred))  
 
 
 
