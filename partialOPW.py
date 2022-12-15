@@ -30,7 +30,7 @@ def POT_feature_1side(a,b,D, m=0.8, nb_dummies=1):
 
 def opw_distance(D, lambda1=0, lambda2=0.1, delta=1):
   N =D.shape[0]
-  M = D.shape[0]
+  M = D.shape[1]
 
   E = np.zeros((N,M))
   for i in range(N):
