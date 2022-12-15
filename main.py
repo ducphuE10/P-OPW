@@ -14,8 +14,22 @@ from progress_bar import ProgressBar
 import pandas as pd
 import sys
 from datetime import datetime
-
+from utils import get_distance
+from popw import entropic_opw_2
 DATA_FOLDER = 'UCR_data/UCRArchive_2018'
+
+@ray.remote
+def popw_(X, Y, lambda1, lambda2, delta = 1, m=0.8,pba=None):
+    X = X.reshape(-1, 1)
+    Y = Y.reshape(-1, 1)
+    D = get_distance(X,Y)
+    a = np.ones(X.shape[0])/X.shape[0]
+    b = np.ones(Y.shape[0])/Y.shape[0]
+    dist = entropic_opw_2(a, b, D, lambda1, lambda2, delta, m ,dropBothSides=True)
+    if pba is not None:
+        pba.update.remote(1)
+    return dist
+
 
 @ray.remote
 def opw_(X, Y, pba=None):
@@ -63,7 +77,7 @@ if __name__ == '__main__':
     parser.add_argument('-l2', '--lambda2', type=float, default=0.1)
     parser.add_argument('-k','--n_neighbors', type=int, default=1, help='number of neighbors')
     parser.add_argument('-t','--test_size', type=int, default=-1, help='test size')
-    parser.add_argument('-m', '--method', type=str, default='opw', help='method in [opw, topw1, topw2]')
+    parser.add_argument('-m', '--method', type=str, default='opw', help='method in [popw ,opw, topw1, topw2]')
     parser.add_argument('-n', '--n_jobs', type=int, default=8, help='number of jobs')
     parser.add_argument('-e', '--exp_file', type=str, default='exp', help='exp file')
 

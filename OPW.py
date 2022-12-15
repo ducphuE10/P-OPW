@@ -2,22 +2,22 @@ import numpy as np
 import ot
 
 
-def POT_feature(M,m,nb_dummies=1):
-    a = np.ones(M.shape[0])
-    b = np.ones(M.shape[1])
+# def POT_feature(M,m,nb_dummies=1):
+#     a = np.ones(M.shape[0])
+#     b = np.ones(M.shape[1])
 
-    if m < 0:
-        raise ValueError("Problem infeasible. Parameter m should be greater"
-                         " than 0.")
-    elif m > np.min((np.sum(a), np.sum(b))):
-        raise ValueError("Problem infeasible. Parameter m should lower or"
-                         " equal than min(|a|_1, |b|_1).")
+#     if m < 0:
+#         raise ValueError("Problem infeasible. Parameter m should be greater"
+#                          " than 0.")
+#     elif m > np.min((np.sum(a), np.sum(b))):
+#         raise ValueError("Problem infeasible. Parameter m should lower or"
+#                          " equal than min(|a|_1, |b|_1).")
 
-    b_extended = np.append(b, [(np.sum(a) - m) / nb_dummies] * nb_dummies)
-    a_extended = np.append(a, [(np.sum(b) - m) / nb_dummies] * nb_dummies)
-    M_extended = np.zeros((len(a_extended), len(b_extended)))
-    M_extended[-nb_dummies:, -nb_dummies:] = np.max(M) * 2
-    M_extended[:len(a), :len(b)] = M
+#     b_extended = np.append(b, [(np.sum(a) - m) / nb_dummies] * nb_dummies)
+#     a_extended = np.append(a, [(np.sum(b) - m) / nb_dummies] * nb_dummies)
+#     M_extended = np.zeros((len(a_extended), len(b_extended)))
+#     M_extended[-nb_dummies:, -nb_dummies:] = np.max(M) * 2
+#     M_extended[:len(a), :len(b)] = M
 
 
 def opw(X, Y, lambda1=1, lambda2=0.1, delta=1, metric='euclidean'):

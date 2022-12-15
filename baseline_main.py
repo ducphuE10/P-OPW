@@ -5,20 +5,36 @@ from sklearn.metrics import accuracy_score
 from OPW import opw
 import numpy as np
 from DTW import dtw_distance
-from algo.l1_ot_dis import TrendOTDis
+# from algo.l1_ot_dis import TrendOTDis
 import ray
 import argparse
 import os
-from algo.t_opw1 import t_opw1
-from algo.drop_dtw import drop_dtw_cost
+# from algo.t_opw1 import t_opw1
+# from algo.drop_dtw import drop_dtw_cost
 from progress_bar import ProgressBar
 import pandas as pd
 import sys
-from sdtw import SoftDTW
-from sdtw.distance import SquaredEuclidean
+# from sdtw import SoftDTW
+# from sdtw.distance import SquaredEuclidean
 
 
 DATA_FOLDER = 'UCR_data/UCRArchive_2018'
+
+
+
+from utils import get_distance
+from popw import entropic_opw_2
+@ray.remote
+def popw_(X, Y, lambda1 = 0, lambda2 = 0.5, delta = 1, m=0.8,pba=None):
+    X = X.reshape(-1, 1)
+    Y = Y.reshape(-1, 1)
+    D = get_distance(X,Y)
+    a = np.ones(X.shape[0])/X.shape[0]
+    b = np.ones(Y.shape[0])/Y.shape[0]
+    dist = entropic_opw_2(a, b, D, lambda1, lambda2, delta, m ,dropBothSides=True)
+    if pba is not None:
+        pba.update.remote(1)
+    return dist
 
 @ray.remote
 def opw_(X, Y, pba=None):
@@ -80,7 +96,7 @@ if __name__ == '__main__':
     parser.add_argument('-l2', '--lambda2', type=float, default=0.1)
     parser.add_argument('-k','--n_neighbors', type=int, default=1, help='number of neighbors')
     parser.add_argument('-t','--test_size', type=int, default=-1, help='test size')
-    parser.add_argument('-m', '--method', type=str, default='opw', help='method in [opw, dtw, softdtw]')
+    parser.add_argument('-m', '--method', type=str, default='popw', help='method in [popw,opw, dtw, softdtw]')
     parser.add_argument('-n', '--n_jobs', type=int, default=8, help='number of jobs')
 
 
@@ -95,6 +111,7 @@ if __name__ == '__main__':
     k = args.n_neighbors
     method = args.method
     dist_func = None
+
     if method == 'opw':
         dist_func = opw_
     elif method == 'dtw':
@@ -103,6 +120,8 @@ if __name__ == '__main__':
         dist_func = sdtw_
     elif method == 'drop_dtw':
         dist_func = drop_dtw
+    elif method == 'popw':
+        dist_func = popw_  
 
     train_path = os.path.join(DATA_FOLDER, args.dataset, args.dataset + '_TRAIN.tsv')
     test_path = os.path.join(DATA_FOLDER, args.dataset, args.dataset + '_TEST.tsv')
