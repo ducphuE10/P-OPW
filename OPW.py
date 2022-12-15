@@ -54,7 +54,6 @@ def opw(X, Y, lambda1=1, lambda2=0.1, delta=1, metric='euclidean'):
 
     d_matrix = np.abs(row - col) / mid_para
 
-    # import ipdb; ipdb.set_trace()
 
     P = np.exp(-d_matrix**2/(2*delta**2)) / (delta*np.sqrt(2*np.pi))
 
@@ -62,7 +61,8 @@ def opw(X, Y, lambda1=1, lambda2=0.1, delta=1, metric='euclidean'):
     # for i in range(N):
     #     for j in range(M):
     #         S[i, j] = lambda1/(((i+1)/N - (j+1)/M) ** 2 + 1)
-    S = lambda1 / ((row - col) ** 2 + 1)
+    # S = lambda1 / ((row - col) ** 2 + 1)
+    S = lambda1 * (row - col) ** 2
 
     D = ot.dist(X, Y, metric=metric)
 

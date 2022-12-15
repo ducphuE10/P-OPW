@@ -8,3 +8,10 @@ configs
 
 UCR_data/
 experiments_results.csv
+
+
+__pycache__
+**/*.pyc
+
+logs/
+exp/

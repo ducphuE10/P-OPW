@@ -39,8 +39,10 @@ class TrendOTDis:
 			raise NotImplementedError
 
 
-	def dist(self, x1, x2, method='trend'):
-		x1_prob, x2_prob = self.trend_filter.fit(x1, x2)
+	def dist(self, x1, x2, method='trend', mean=None, std=None):
+		x1_norm = (x1 - mean) / std
+		x2_norm = (x2 - mean) / std
+		x1_prob, x2_prob = self.trend_filter.fit(x1_norm, x2_norm)
 		x1_trend, x2_trend = None, None
 		if method == 'trend':
 			x1_trend, x2_trend = self.trend_filter.get_trend()

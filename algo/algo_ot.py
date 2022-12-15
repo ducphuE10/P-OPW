@@ -43,6 +43,7 @@ class BaseOrderPreserve:
         M : array-like, shape (`n1`, `n2`)
             transportation matrix between samples in :math:`\mathbf{x_1}` and :math:`\mathbf{x_2}`
         """
+        # import ipdb; ipdb.set_trace()
         tolerance = .5e-2
         maxIter = 200
 
@@ -66,8 +67,8 @@ class BaseOrderPreserve:
         if x2_trend is None:
             x2_trend = x2
 
-        d_matrix = self.get_d_matrix(x1, x2)
-        # d_matrix = self.get_d_matrix(x1_trend, x2_trend)
+        # d_matrix = self.get_d_matrix(x1, x2)
+        d_matrix = self.get_d_matrix(x1_trend, x2_trend)
         P = np.exp(-d_matrix ** 2 / (2 * self.delta ** 2)) / (self.delta * np.sqrt(2 * np.pi))
         P = a@b.T * P
 
@@ -156,7 +157,8 @@ class TOPW1(TOPWBase):
         super().__init__(lambda1, lambda2, delta)
 
     def _cal_d_matrix_from_mn(self, m, n, M, N):
-        return np.maximum(m,n) / np.minimum(m,n)
+        epsilon = 1e-6
+        return np.maximum(m,n) / (np.minimum(m,n) + epsilon)
 
 
 class OPW(BaseOrderPreserve):
