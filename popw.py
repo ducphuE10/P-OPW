@@ -61,6 +61,17 @@ def opw_distance(D, lambda1=0, lambda2=0.1, delta=1):
   return D - lambda1*E + lambda2*(F/2 + np.log(delta*np.sqrt(2*np.pi)))
 
 
+def entropic_opw_0(a, b, D, lambda1, lambda2, delta=1, m=None, dropBothSides = False):
+  #NO PARTIAL
+  '''
+  Caffarelli, L. A., & McCann, R. J. (2010) Free boundaries in
+  optimal transport and Monge-Ampere obstacle problems. Annals of
+  mathematics, 673-730.
+  '''
+  D = opw_distance(D, lambda1, lambda2, delta)  
+  T = ot.sinkhorn(a, b, D,lambda2)
+  return np.sum(T*D)
+
 def entropic_opw_1(a, b, D, lambda1, lambda2, delta=1, m=None, numItermax=1000):
   '''
   Benamou, J. D., Carlier, G., Cuturi, M., Nenna, L., & Peyré, G. (2015). 
@@ -69,9 +80,9 @@ def entropic_opw_1(a, b, D, lambda1, lambda2, delta=1, m=None, numItermax=1000):
   '''
   D = opw_distance(D, lambda1, lambda2, delta)
   T = ot.partial.entropic_partial_wasserstein(a, b, D, lambda2, m, numItermax)
-  return T
+  return np.sum(T*D)
 
-def entropic_opw_2(a, b, D, lambda1, lambda2, delta=1, m=None, numItermax=1000, dropBothSides = False):
+def entropic_opw_2(a, b, D, lambda1, lambda2, delta=1, m=None, dropBothSides = False):
   '''
   Caffarelli, L. A., & McCann, R. J. (2010) Free boundaries in
   optimal transport and Monge-Ampere obstacle problems. Annals of
@@ -93,12 +104,15 @@ def entropic_opw_3(a, b, D, lambda1, lambda2, delta=1, m=None, numItermax=1000, 
   optimal transport and Monge-Ampere obstacle problems. Annals of
   mathematics, 673-730.
   '''
-  D = opw_distance(D, lambda1, lambda2, delta)
+  D_new = opw_distance_2(D, lambda1, lambda2, delta)
   if dropBothSides:
-    a,b,D = POT_feature_2sides(a,b,opw_distance(D),m)
+    a,b,D_new = POT_feature_2sides(a,b,D_new,m)
   else:
     #drop side b
-    a,b,D = POT_feature_1side(a,b,opw_distance(D),m)
+    a,b,D_new = POT_feature_1side(a,b,D_new,m)
   
-  T = ot.partial.entropic_partial_wasserstein(a, b, D, lambda2, m, numItermax)
-  return np.sum(T*D)
+  T = ot.sinkhorn(a, b, D_new,lambda2)
+
+  return np.sum(T*D_new)
+
+  D 

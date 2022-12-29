@@ -1,0 +1,32 @@
+INFO:root:train size: 20, test size: 343
+INFO:root:X_test_noise shape: (343, 24)
+2022-12-29 16:39:01,444	INFO worker.py:1518 -- Started a local Ray instance.
+[36m(partial_opw pid=38434)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38434)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38434)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38434)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38433)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38433)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38433)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38433)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38433)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38433)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38432)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38432)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38432)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38432)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38435)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38435)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38435)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38435)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38435)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38435)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38434)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38434)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38432)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38432)[39m   u = 1. / nx.dot(Kp, v)
+
+
+100%|██████████| 6860/6860 [00:04<00:00, 1381.64it/s]
+INFO:root:Accuracy: 0.29737609329446063
+INFO:root:cost time: 9.705409049987793

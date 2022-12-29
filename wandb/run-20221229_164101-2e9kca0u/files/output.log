@@ -1,0 +1,9 @@
+INFO:root:train size: 20, test size: 343
+INFO:root:X_test_noise shape: (343, 24)
+2022-12-29 16:41:07,117	INFO worker.py:1518 -- Started a local Ray instance.
+
+
+
+100%|███████████████████████████████████████████████████████████████████████████████████| 6860/6860 [00:05<00:00, 1303.43it/s]
+INFO:root:Accuracy: 0.29737609329446063
+INFO:root:cost time: 9.996572494506836

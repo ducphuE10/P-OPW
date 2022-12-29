@@ -1,0 +1,66 @@
+INFO:root:train size: 20, test size: 343
+INFO:root:X_test_noise shape: (343, 24)
+2022-12-29 16:39:41,818	INFO worker.py:1518 -- Started a local Ray instance.
+[36m(partial_opw pid=38929)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38929)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38929)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38929)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38929)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38929)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38930)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38930)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38930)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38930)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38932)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38932)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38932)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38932)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38932)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38932)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38931)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: divide by zero encountered in true_divide
+[36m(partial_opw pid=38931)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38931)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:492: UserWarning: Warning: numerical errors at iteration 0
+[36m(partial_opw pid=38931)[39m   warnings.warn('Warning: numerical errors at iteration %d' % ii)
+[36m(partial_opw pid=38930)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38930)[39m   u = 1. / nx.dot(Kp, v)
+[36m(partial_opw pid=38931)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:485: RuntimeWarning: overflow encountered in true_divide
+[36m(partial_opw pid=38931)[39m   u = 1. / nx.dot(Kp, v)
+
+
+100%|███████████████████████████████████████████████████████████████████████████████████| 6860/6860 [00:05<00:00, 1323.61it/s]
+Traceback (most recent call last):
+  File "/home/phu/Project/P-OPW/partial_opw_exp.py", line 140, in <module>
+    ray.shutdown()
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 1604, in shutdown
+    _global_node.kill_all_processes(check_alive=False, allow_graceful=True)
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/node.py", line 1343, in kill_all_processes
+    self._kill_process_type(
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/node.py", line 1143, in _kill_process_type
+    self._kill_process_impl(
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/node.py", line 1199, in _kill_process_impl
+    process.wait(timeout_seconds)
+  File "/home/phu/anaconda3/envs/ML/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/home/phu/anaconda3/envs/ML/lib/python3.10/subprocess.py", line 1937, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/home/phu/Project/P-OPW/partial_opw_exp.py", line 140, in <module>
+    ray.shutdown()
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 105, in wrapper
+    return func(*args, **kwargs)
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/worker.py", line 1604, in shutdown
+    _global_node.kill_all_processes(check_alive=False, allow_graceful=True)
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/node.py", line 1343, in kill_all_processes
+    self._kill_process_type(
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/node.py", line 1143, in _kill_process_type
+    self._kill_process_impl(
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/_private/node.py", line 1199, in _kill_process_impl
+    process.wait(timeout_seconds)
+  File "/home/phu/anaconda3/envs/ML/lib/python3.10/subprocess.py", line 1209, in wait
+    return self._wait(timeout=timeout)
+  File "/home/phu/anaconda3/envs/ML/lib/python3.10/subprocess.py", line 1937, in _wait
+    time.sleep(delay)
+KeyboardInterrupt
