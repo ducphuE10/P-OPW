@@ -1,0 +1,124 @@
+{
+    "os": "Linux-5.15.0-56-generic-x86_64-with-glibc2.35",
+    "python": "3.10.8",
+    "heartbeatAt": "2022-12-22T05:07:57.752648",
+    "startedAt": "2022-12-22T05:07:56.813210",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--dataset",
+        "Fungi",
+        "--noise_ratio",
+        "0.2",
+        "--seed",
+        "42"
+    ],
+    "state": "running",
+    "program": "/home/phu/Project/P-OPW/partial_opw_exp.py",
+    "codePath": "partial_opw_exp.py",
+    "git": {
+        "remote": "https://github.com/ducphuE10/P-OPW.git",
+        "commit": "4c8d7089b3381314a1c47b2bb0e4599d6c324b7a"
+    },
+    "email": null,
+    "root": "/home/phu/Project/P-OPW",
+    "host": "zephyrus",
+    "username": "phu",
+    "executable": "/home/phu/anaconda3/envs/ML/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 534.72475,
+        "min": 400.0,
+        "max": 4463.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 2517.197,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        },
+        {
+            "current": 400.0,
+            "min": 400.0,
+            "max": 4463.0
+        }
+    ],
+    "disk": {
+        "total": 98.12100219726562,
+        "used": 47.74092102050781
+    },
+    "memory": {
+        "total": 7.173450469970703
+    }
+}

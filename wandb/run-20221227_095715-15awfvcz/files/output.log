@@ -1,0 +1,173 @@
+INFO:root:train size: 20, test size: 1252
+INFO:root:X_test_noise shape: (1252, 84)
+2022-12-27 09:57:23,654	INFO worker.py:1518 -- Started a local Ray instance.
+[33m(raylet)[39m /home/phu/.local/lib/python3.10/site-packages/ray/dashboard/agent.py:50: DeprecationWarning: There is no current event loop
+[33m(raylet)[39m   aiogrpc.init_grpc_aio()
+[33m(raylet)[39m /home/phu/.local/lib/python3.10/site-packages/ray/dashboard/agent.py:470: DeprecationWarning: There is no current event loop
+[33m(raylet)[39m   loop = asyncio.get_event_loop()
+[36m(partial_opw pid=15491)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=15491)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+[36m(partial_opw pid=15490)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=15490)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+[36m(partial_opw pid=15492)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=15492)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+[36m(partial_opw pid=15493)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=15493)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|██████████| 25040/25040 [05:16<00:00, 79.17it/s]
+INFO:root:Accuracy: 0.8394568690095847
+INFO:root:cost time: 325.60344886779785

@@ -1,0 +1,15 @@
+INFO:root:train size: 20, test size: 343
+INFO:root:X_test_noise shape: (343, 24)
+2022-12-22 11:43:36,633	INFO worker.py:1518 -- Started a local Ray instance.
+Traceback (most recent call last):
+  File "/home/phu/Project/P-OPW/partial_opw_exp.py", line 116, in <module>
+    results.append(partial_opw(X_train[i], X_test_noise[j],lambda1=0, lambda2=0.5, delta = 1, m=0.8,dropBothSides=False, pba =actor))
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/remote_function.py", line 126, in __call__
+    raise TypeError(
+TypeError: Remote functions cannot be called directly. Instead of running '__main__.partial_opw()', try '__main__.partial_opw.remote()'.
+Traceback (most recent call last):
+  File "/home/phu/Project/P-OPW/partial_opw_exp.py", line 116, in <module>
+    results.append(partial_opw(X_train[i], X_test_noise[j],lambda1=0, lambda2=0.5, delta = 1, m=0.8,dropBothSides=False, pba =actor))
+  File "/home/phu/.local/lib/python3.10/site-packages/ray/remote_function.py", line 126, in __call__
+    raise TypeError(
+TypeError: Remote functions cannot be called directly. Instead of running '__main__.partial_opw()', try '__main__.partial_opw.remote()'.

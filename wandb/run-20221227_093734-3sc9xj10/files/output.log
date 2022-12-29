@@ -1,0 +1,82 @@
+INFO:root:train size: 20, test size: 601
+INFO:root:X_test_noise shape: (601, 70)
+2022-12-27 09:37:42,868	INFO worker.py:1518 -- Started a local Ray instance.
+[36m(partial_opw pid=9670)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=9670)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+[36m(partial_opw pid=9669)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=9669)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+[36m(partial_opw pid=9671)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=9671)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+[36m(partial_opw pid=9672)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=9672)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|██████████| 12020/12020 [02:16<00:00, 88.09it/s]
+INFO:root:Accuracy: 0.7670549084858569
+INFO:root:cost time: 143.0558054447174

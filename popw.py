@@ -28,6 +28,22 @@ def POT_feature_1side(a,b,D, m=0.8, nb_dummies=1):
   D_extended[:len(a), :len(b)] = D
   return a_extended, b,D_extended
 
+def opw_distance_2(D,lambda1=20, lambda2=0.1, delta=1):
+  N =D.shape[0]
+  M = D.shape[1]
+
+  E = np.zeros((N,M))
+  for i in range(N):
+    for j in range(M):
+      E[i,j] = (i/N - j/M)**2
+  
+    l = np.zeros((N,M))
+  for i in range(N):
+    for j in range(M):
+      l[i,j] = abs(i/N - j/M)/(np.sqrt(1/N**2 + 1/M**2))
+  F = l**2
+  return D + lambda1*E + lambda2*(F/2 + np.log(delta*np.sqrt(2*np.pi)))
+
 def opw_distance(D, lambda1=0, lambda2=0.1, delta=1):
   N =D.shape[0]
   M = D.shape[1]
@@ -69,4 +85,20 @@ def entropic_opw_2(a, b, D, lambda1, lambda2, delta=1, m=None, numItermax=1000, 
     a,b,D = POT_feature_1side(a,b,opw_distance(D),m)
   
   T = ot.sinkhorn(a, b, D,lambda2)
+  return np.sum(T*D)
+
+def entropic_opw_3(a, b, D, lambda1, lambda2, delta=1, m=None, numItermax=1000, dropBothSides = False):
+  '''
+  Caffarelli, L. A., & McCann, R. J. (2010) Free boundaries in
+  optimal transport and Monge-Ampere obstacle problems. Annals of
+  mathematics, 673-730.
+  '''
+  D = opw_distance(D, lambda1, lambda2, delta)
+  if dropBothSides:
+    a,b,D = POT_feature_2sides(a,b,opw_distance(D),m)
+  else:
+    #drop side b
+    a,b,D = POT_feature_1side(a,b,opw_distance(D),m)
+  
+  T = ot.partial.entropic_partial_wasserstein(a, b, D, lambda2, m, numItermax)
   return np.sum(T*D)

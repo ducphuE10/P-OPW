@@ -1,0 +1,151 @@
+INFO:root:train size: 30, test size: 30
+INFO:root:X_test_noise shape: (30, 570)
+2022-12-22 15:10:42,953	INFO worker.py:1518 -- Started a local Ray instance.
+  0%|          | 1/900 [00:01<18:42,  1.25s/it][36m(partial_opw pid=22256)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=22256)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+  0%|          | 2/900 [00:01<11:02,  1.35it/s][36m(partial_opw pid=22254)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=22254)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+  0%|          | 3/900 [00:01<07:44,  1.93it/s][36m(partial_opw pid=22255)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=22255)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+  0%|          | 4/900 [00:02<05:22,  2.78it/s][36m(partial_opw pid=22253)[39m /home/phu/.local/lib/python3.10/site-packages/ot/bregman.py:517: UserWarning: Sinkhorn did not converge. You might want to increase the number of iterations `numItermax` or the regularization parameter `reg`.
+[36m(partial_opw pid=22253)[39m   warnings.warn("Sinkhorn did not converge. You might want to "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+100%|██████████| 900/900 [04:38<00:00,  3.23it/s]
+INFO:root:Accuracy: 0.26666666666666666
+INFO:root:cost time: 281.7510235309601
