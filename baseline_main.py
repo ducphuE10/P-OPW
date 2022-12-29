@@ -58,6 +58,7 @@ def sdtw_(X, Y, pba=None):
         pba.update.remote(1)
     return dist
 
+@ray.remote
 def drop_dtw(X, Y, pba=None):
     X = X.reshape(-1, 1)
     Y = Y.reshape(-1, 1)
@@ -70,11 +71,13 @@ def drop_dtw(X, Y, pba=None):
 
 
 
+
+
 if __name__ == '__main__':
 
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset', type=str, default='FaceUCR')
+    parser.add_argument('--dataset', type=str, default='FacesUCR')
     parser.add_argument('--delta', type=float, default=1)
     parser.add_argument('-l1', '--lambda1', type=float, default=1)
     parser.add_argument('-l2', '--lambda2', type=float, default=0.1)
@@ -132,13 +135,15 @@ if __name__ == '__main__':
 
     results = []
 
+    # import ipdb; ipdb.set_trace()
     for i in range(train_size):
         for j in range(test_size):
             results.append(dist_func.remote(X_train[i], X_test[j], actor))
-            # dtw_(X_train[i], X_test[j])
+            # a = dist_func(X_train[i], X_test[j])
     pb.print_until_done()
     results_values = ray.get(results)
     ray.shutdown()
+
 
     result = np.array(results_values).reshape(train_size, test_size)
     y_pred = y_train[np.argmin(result, axis=0)]

@@ -44,7 +44,7 @@ if __name__ == '__main__':
         #     print('Skip')
         #     continue
         if dataset in df_write.index:
-            if not np.isnan(df_write.loc[dataset, args.method+"_norm"]):
+            if not np.isnan(df_write.loc[dataset, args.method]):
                 print('Skip')
                 continue
 

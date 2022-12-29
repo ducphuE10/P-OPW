@@ -44,4 +44,4 @@ def get_data(path, dataset_size=-1):
         labels = labels[:dataset_size]
     return data, labels
 
-train_data, train_labels = get_data('FacesUCR/FacesUCR_TRAIN.txt')
+# train_data, train_labels = get_data('FacesUCR/FacesUCR_TRAIN.txt')
