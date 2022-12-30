@@ -98,21 +98,18 @@ def entropic_opw_2(a, b, D, lambda1, lambda2, delta=1, m=None, dropBothSides = F
   T = ot.sinkhorn(a, b, D,lambda2)
   return np.sum(T*D)
 
-def entropic_opw_3(a, b, D, lambda1, lambda2, delta=1, m=None, numItermax=1000, dropBothSides = False):
+def entropic_opw_3(a, b, D, lambda1, lambda2, delta=1, m=None, dropBothSides = False):
   '''
   Caffarelli, L. A., & McCann, R. J. (2010) Free boundaries in
   optimal transport and Monge-Ampere obstacle problems. Annals of
   mathematics, 673-730.
   '''
-  D_new = opw_distance_2(D, lambda1, lambda2, delta)
+  D = opw_distance_2(D, lambda1, lambda2, delta)
   if dropBothSides:
-    a,b,D_new = POT_feature_2sides(a,b,D_new,m)
+    a,b,D = POT_feature_2sides(a,b,D,m)
   else:
     #drop side b
-    a,b,D_new = POT_feature_1side(a,b,D_new,m)
+    a,b,D = POT_feature_1side(a,b,D,m)
   
-  T = ot.sinkhorn(a, b, D_new,lambda2)
-
-  return np.sum(T*D_new)
-
-  D 
+  T = ot.sinkhorn(a, b, D,lambda2)
+  return np.sum(T*D)
